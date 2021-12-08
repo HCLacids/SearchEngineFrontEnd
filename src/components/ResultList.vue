@@ -25,6 +25,11 @@ a {
     padding: 10px;
     box-shadow: 1px 1px 1px 1px darkgray;
     border-radius: 0.5em;
+    flex: 1;
+    transition: 0.5s ease-in-out;
+}
+.resultLiBox:hover{
+    flex: 1.5;
 }
 .title {
     margin: 5px 0;
