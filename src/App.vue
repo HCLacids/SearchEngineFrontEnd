@@ -3,6 +3,7 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import SearchInput from './components/SearchInput.vue';
 import ResultList from './components/ResultList.vue';
+import { reactive } from 'vue';
 
 const res = [{text:"1222",link:"#", description:"1223"},
   {text:"1222",link:"#", description:"1223"},
@@ -13,11 +14,13 @@ const res = [{text:"1222",link:"#", description:"1223"},
   {text:"1222",link:"#", description:"1223"},
   {text:"1222",link:"#", description:"1223"},
   {text:"1222",link:"#", description:"1223"}]
+
+const state = reactive({results: []});
 </script>
 
 <template>
-  <SearchInput />
-  <ResultList :results="res" />
+  <SearchInput :results = "state.results" />
+  <ResultList :results = "res" />
 </template>
 
 <style>

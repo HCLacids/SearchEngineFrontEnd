@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 
+defineProps<{ results: {text: string, link: string, description: string}[] }>();
+
 const state = reactive({value: ''});
 
 let timer:ReturnType<typeof setTimeout> | null = null;
@@ -10,6 +12,17 @@ const handleChange = () => {
         clearTimeout(timer);
     }
     timer = setTimeout(()=> {
+        fetch('http://localhost:8000/search?text=' + state.value,{
+            method: 'GET',
+            headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((res) => {
+            console.log(res);
+        })
         console.log(state.value);
     },1000)
 }
