@@ -1,36 +1,15 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 
-defineProps<{ results: {text: string, link: string, description: string}[] }>();
+defineProps<{ onchange:(str: string) => void }>();
 
 const state = reactive({value: ''});
-
-let timer:ReturnType<typeof setTimeout> | null = null;
-
-const handleChange = () => {
-    if(timer) {
-        clearTimeout(timer);
-    }
-    timer = setTimeout(()=> {
-        fetch('api/search?text=' + state.value, {
-            method: 'GET',
-            headers : { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            }
-        }).then((response) => {
-            return response.json();
-        }).then((res) => {
-            console.log(res);
-        })
-    },1000)
-}
 </script>
 
 <template>
     <div class="container">
         <h2>HCL's Search</h2>
-        <input class="input" v-model = "state.value" @input="handleChange" />
+        <input class="input" v-model = "state.value" @input="() => onchange(state.value)" />
     </div>
 </template>
 
