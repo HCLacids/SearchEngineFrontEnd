@@ -12,7 +12,7 @@ const handleChange = () => {
         clearTimeout(timer);
     }
     timer = setTimeout(()=> {
-        fetch('http://localhost:8000/search?text=' + state.value,{
+        fetch('api/search?text=' + state.value, {
             method: 'GET',
             headers : { 
                 'Content-Type': 'application/json',
@@ -23,7 +23,6 @@ const handleChange = () => {
         }).then((res) => {
             console.log(res);
         })
-        console.log(state.value);
     },1000)
 }
 </script>
@@ -32,7 +31,6 @@ const handleChange = () => {
     <div class="container">
         <h2>HCL's Search</h2>
         <input class="input" v-model = "state.value" @input="handleChange" />
-        {{state.value}}
     </div>
 </template>
 

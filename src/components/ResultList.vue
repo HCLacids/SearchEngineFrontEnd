@@ -1,22 +1,32 @@
 <script setup lang="ts">
 
-defineProps<{ results: {text: string, link: string, description: string}[] }>();
+defineProps<{ results: {text: string, link: string, description: string}[], is: boolean }>();
 
 </script>
 
 <template>
-    <div class = "containerLi">
+    <div class = "containerLi" v-if="is">
         <div v-for = "li in results" class = "resultLiBox">
             <div class = "title"><a :href="li.link" target = "_blank">{{li.text}}</a></div>
             <div class = "description">{{li.description}}</div>
             <div class = "link">{{li.link}}</div>
         </div>
     </div>
+    <div v-else class = "noneRes">
+        No result
+    </div>
 </template>
 
 <style>
 a {
-    text-decoration-color: darkcyan;
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue;
+    text-decoration: underline;
+    text-decoration-color: blue;
 }
 .resultLiBox {
     width: 10em;
@@ -37,10 +47,14 @@ a {
 }
 .description {
     margin: 5px 0;
+    height: 60px;
     font-size: 16px;
+    overflow: hidden;
 }
 
 .link {
+    width: 100%;
+    overflow: hidden;
     color: darkgray;
 }
 
@@ -53,5 +67,29 @@ a {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+}
+
+.noneRes {
+    width: 80%;
+    text-align: center;
+    margin: 20px auto;
+}
+.containerLi::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+.containerLi::-webkit-scrollbar-track {
+    background: #f6f6f6;
+    border-radius: 2px;
+}
+.containerLi::-webkit-scrollbar-thumb {
+    background: #aaa;
+    border-radius: 2px;
+}
+.containerLi::-webkit-scrollbar-thumb:hover {
+    background: #747474;
+}
+.containerLi::-webkit-scrollbar-corner {
+    background: #f6f6f6;
 }
 </style>
